@@ -32,9 +32,10 @@ function Cart({ cartArr, sum, currentUserName, removeFromCart }) {
                 <div className="cartContent">
                   <p>{j.name}</p>
                   <p>{j.price}₪</p>
-                  <button onClick={() => removeFromCart(j.id, j.price)}>
+                  <button onClick={() => removeFromCart(j.uniqueId, j.price)}>remove</button>
+                  {/* <button onClick={() => removeFromCart(j.id, j.price)}>
                     remove
-                  </button>
+                  </button> */}
                 </div>
               </div>
             ))}

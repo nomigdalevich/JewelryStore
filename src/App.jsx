@@ -15,6 +15,11 @@ import Disconnection from './commponent/Disconnection';
 import ProuductsCard from './commponent/ProuductsCard';
 import Home from './commponent/Home';
 
+//שיניתי בגירסא זו את :
+//addTocart- app
+//removeFromCart- app
+//cart - button
+
 function App() {
 
     const [cart, setCart] = useState([
@@ -25,20 +30,19 @@ function App() {
     const [sum, setSum] = useState(0);
 
     const addToCart = (id, src, name, price) => {
-        const p = { id: id, src: src, name: name, price: price };
-        const modifiedCart = [...cart];
-        modifiedCart.push(p);
-        setCart(modifiedCart);
-        setCount(count + 1);
-        setSum(SumP => SumP + Number(price));
+    const uniqueId = Date.now(); // מזהה ייחודי לכל פריט שנוסף
+    const p = { uniqueId, id, src, name, price }; 
+    setCart(prev => [...prev, p]);
+    setCount(prev => prev + 1);
+    setSum(prev => prev + Number(price));
     }
 
 
-    const removeFromCart = (idToRemove, price) => {
-        const updatedCart = cart.filter(item => item.id !== idToRemove);
+    const removeFromCart = (uniqueId, price) => {
+        const updatedCart = cart.filter(item => item.uniqueId !== uniqueId);
         setCart(updatedCart);
-        setSum(Number(sum - price))
-        setCount(Number(count - 1))
+        setSum(prev => prev - Number(price));
+        setCount(prev => prev - 1);
     };
 
 
